@@ -22,7 +22,6 @@ INSERT INTO customers (id, customer_name, customer_status, total_customer_mileag
 (7, 'Sam Rio', 'None', 2653),
 (8, 'Tom Jones', 'Gold', 205767);
 
-
 INSERT INTO customers_flights (customer_id, flight_id) VALUES
 (1, 4),
 (1, 3),

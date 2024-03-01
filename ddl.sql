@@ -10,17 +10,20 @@ CREATE TABLE posts(
       author_id	 INT NOT NULL,
       PRIMARY KEY (id)
 );
+
 CREATE TABLE authors(
 	  id         INT NOT NULL auto_increment,
 	  author     VARCHAR(255) NOT NULL,
       PRIMARY KEY (id)
 );
+
 CREATE TABLE aircrafts(
 	  id                     INT NOT NULL auto_increment,
 	  aircraft               VARCHAR(255) NOT NULL,
 	  total_aircraft_seats   INT NOT NULL,
 	  PRIMARY KEY (id)
 );
+
 CREATE TABLE flights(
 	  id                     INT NOT NULL auto_increment,
 	  flight_number          VARCHAR(255) NOT NULL,
@@ -29,6 +32,7 @@ CREATE TABLE flights(
 	  PRIMARY KEY (id),
       FOREIGN KEY (aircraft_id) REFERENCES aircrafts(id)
 );
+
 CREATE TABLE customers(
 	  id                     INT NOT NULL auto_increment,
 	  customer_name          VARCHAR(255) NOT NULL,
@@ -36,6 +40,7 @@ CREATE TABLE customers(
       total_customer_mileage INT NOT NULL,
 	  PRIMARY KEY (id)
 );
+
 CREATE TABLE customers_flights(
 	  customer_id INT NOT NULL,
       flight_id   INT NOT NULL,
