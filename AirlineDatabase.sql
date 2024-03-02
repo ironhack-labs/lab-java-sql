@@ -1,13 +1,14 @@
-CREATE SCHEMA Airlines;
+CREATE DATABASE Airlines;
+USE Airlines;
 
-CREATE TABLE Airlines.Aircrafts (
+CREATE TABLE Aircrafts (
     ID int NOT NULL AUTO_INCREMENT,
     Name varchar(255) NOT NULL,
 	Seats int NOT NULL,
     PRIMARY KEY (ID)
 );
 
-CREATE TABLE Airlines.Customers (
+CREATE TABLE Customers (
     ID int NOT NULL AUTO_INCREMENT,
     Name varchar(255) NOT NULL,
 	Status varchar(6) NOT NULL,
@@ -15,7 +16,7 @@ CREATE TABLE Airlines.Customers (
     PRIMARY KEY (ID)
 );
 
-CREATE TABLE Airlines.Flights (
+CREATE TABLE Flights (
     ID int NOT NULL AUTO_INCREMENT,
     AircraftID int NOT NULL,
     FlightNumber varchar(5) NOT NULL,
@@ -24,7 +25,7 @@ CREATE TABLE Airlines.Flights (
 	FOREIGN KEY (AircraftID) REFERENCES Aircrafts(ID)
 );
 
-CREATE TABLE Airlines.Tickets (
+CREATE TABLE Tickets (
     ID int NOT NULL AUTO_INCREMENT,
     CustomerID int NOT NULL,
     FlightID int NOT NULL,
@@ -33,12 +34,12 @@ CREATE TABLE Airlines.Tickets (
 	FOREIGN KEY (FlightID) REFERENCES Flights(ID)
 );
 
-INSERT INTO Airlines.Aircrafts (Name, Seats) VALUES
+INSERT INTO Aircrafts (Name, Seats) VALUES
 	('Boeing 747', 400),
 	('Airbus A330', 236),	
     ('Boeing 777', 264);
 
-INSERT INTO Airlines.Customers (Name, Status, TotalMileage) VALUES
+INSERT INTO Customers (Name, Status, TotalMileage) VALUES
     ('Agustine Riviera', 'Silver', 115235),
 	('Alaina Sepulvida', 'None', 6008),
 	('Tom Jones', 'Gold', 205767),
@@ -48,14 +49,14 @@ INSERT INTO Airlines.Customers (Name, Status, TotalMileage) VALUES
 	('Jennifer Cortez', 'Gold', 300582),
 	('Christian Janco', 'Silver', 14642);
     
-INSERT INTO Airlines.Flights (AircraftID, FlightNumber, Mileage) VALUES
+INSERT INTO Flights (AircraftID, FlightNumber, Mileage) VALUES
 	(1, 'DL143', 135),
 	(2, 'DL122', 4370),
 	(3, 'DL53', 2078),
 	(3, 'DL222', 1765),
 	(1, 'DL37', 531);
     
-INSERT INTO Airlines.Tickets (CustomerID, FlightID) VALUES
+INSERT INTO Tickets (CustomerID, FlightID) VALUES
 	(1, 1),
 	(1, 2),
 	(2, 2),
