@@ -1,3 +1,6 @@
+CREATE DATABASE example_lab_sql_exercise1;
+USE example_lab_sql_exercise1;
+
 CREATE TABLE Author(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     author_name varchar(255) NOT NULL

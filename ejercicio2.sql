@@ -1,3 +1,6 @@
+CREATE DATABASE example_lab_sql_exercise2;
+USE example_lab_sql_exercise2;
+
 -- Customers Table
 CREATE TABLE Customer (
     CustomerID INT PRIMARY KEY AUTO_INCREMENT,
