@@ -1,3 +1,5 @@
+USE Airlines;
+
 SELECT COUNT(*) 
 FROM Flights;
 
