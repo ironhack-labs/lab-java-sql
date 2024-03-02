@@ -1,45 +1,45 @@
 USE Airlines;
 
 SELECT COUNT(*) 
-FROM Flights;
+FROM Flight;
 
 SELECT AVG(Mileage) 
-FROM Flights;
+FROM Flight;
 
 SELECT AVG(Seats) 
-FROM Aircrafts;
+FROM Aircraft;
 
 SELECT Status, AVG(TotalMileage) 
-FROM Customers 
+FROM Customer
 GROUP BY Status;
 
 SELECT Status, MAX(TotalMileage) 
-FROM Customers
+FROM Customer
 GROUP BY Status;
 
 
 SELECT COUNT(*) 
-FROM Aircrafts
+FROM Aircraft
 WHERE NAME LIKE '%Boeing%';
 
 
 SELECT ID, FlightNumber, Mileage
-FROM Flights
+FROM Flight
 WHERE Mileage BETWEEN 300 AND 2000;
 
 
-SELECT Customers.Status, AVG(Flights.Mileage)
-FROM Tickets
-INNER JOIN Customers ON Tickets.CustomerID = Customers.ID
-INNER JOIN Flights ON Tickets.FlightID = Flights.ID
-GROUP BY Customers.Status;
+SELECT Customer.Status, AVG(Flight.Mileage)
+FROM FlightBooking
+INNER JOIN Customer ON FlightBooking.CustomerID = Customer.ID
+INNER JOIN Flight ON FlightBooking.FlightID = Flight.ID
+GROUP BY Customer.Status;
 
-SELECT Aircrafts.Name, COUNT(*) AS Count
-FROM Aircrafts
-INNER JOIN Flights ON Aircrafts.ID = Flights.AircraftID
-INNER JOIN Tickets ON Flights.ID = Tickets.FlightID
-INNER JOIN Customers ON Tickets.CustomerID = Customers.ID
-WHERE Customers.Status = 'Gold'
-GROUP BY Aircrafts.Name
+SELECT Aircraft.Name, COUNT(*) AS Count
+FROM Aircraft
+INNER JOIN Flight ON Aircraft.ID = Flight.AircraftID
+INNER JOIN FlightBooking ON Flight.ID = FlightBooking.FlightID
+INNER JOIN Customer ON Ticket.CustomerID = Customer.ID
+WHERE Customer.Status = 'Gold'
+GROUP BY Aircraft.Name
 ORDER BY Count DESC
 LIMIT 1;
