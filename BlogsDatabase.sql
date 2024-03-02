@@ -1,10 +1,12 @@
-CREATE TABLE Authors (
+CREATE SCHEMA Blogs;
+
+CREATE TABLE Blogs.Authors (
     ID int NOT NULL AUTO_INCREMENT,
     Name varchar(255) NOT NULL,
     PRIMARY KEY (ID)
 );
 
-CREATE TABLE Books (
+CREATE TABLE Blogs.Blogs (
     ID int NOT NULL AUTO_INCREMENT,
     AuthorID int NOT NULL,
     Title varchar(255) NOT NULL,
@@ -14,12 +16,12 @@ CREATE TABLE Books (
 	FOREIGN KEY (AuthorID) REFERENCES Authors(ID)
 );
 
-INSERT INTO Authors (Name) VALUES
+INSERT INTO Blogs.Authors (Name) VALUES
     ('Maria Charlotte'),
     ('Juan Perez'),
     ('Gemma Alcocer');
 
-INSERT INTO Books (AuthorID, Title, WordCount, Views) VALUES
+INSERT INTO Blogs.Blogs (AuthorID, Title, WordCount, Views) VALUES
     (1, 'Best Paint Colors', 814,14),
     (2, 'Small Space Decorating Tips', 1146, 221),
     (1, 'Hot Accessories', 986, 105),
