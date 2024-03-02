@@ -4,30 +4,28 @@ USE example_lab_sql_exercise2;
 -- Customers Table
 CREATE TABLE Customer (
     CustomerID INT PRIMARY KEY AUTO_INCREMENT,
-    CustomerName VARCHAR(255),
-    CustomerStatus VARCHAR(50),
-    TotalCustomerMileage INT
+    CustomerName VARCHAR(255) NOT NULL,
+    CustomerStatus VARCHAR(50) NOT NULL,
+    TotalCustomerMileage INT NOT NULL
 );
 
 -- Flights Table
 CREATE TABLE Flight (
     FlightNumber VARCHAR(10) PRIMARY KEY,
-    Aircraft VARCHAR(50),
-    TotalAircraftSeats INT,
-    FlightMileage INT
+    Aircraft VARCHAR(50) NOT NULL,
+    TotalAircraftSeats INT NOT NULL,
+    FlightMileage INT NOT NULL
 );
+
 
 -- Customer Flights Table
 CREATE TABLE CustomerFlight (
     CustomerFlightID INT PRIMARY KEY AUTO_INCREMENT,
-    CustomerID INT,
-    FlightNumber VARCHAR(10),
+    CustomerID INT NOT NULL,
+    FlightNumber VARCHAR(10) NOT NULL,
     FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
     FOREIGN KEY (FlightNumber) REFERENCES Flight(FlightNumber)
 );
-
-
-
 -- Inserts para la tabla Customer
 INSERT INTO Customer (CustomerName, CustomerStatus, TotalCustomerMileage) VALUES
 ('Agustine Riviera', 'Silver', 115235),
@@ -49,30 +47,23 @@ INSERT INTO Flight (FlightNumber, Aircraft, TotalAircraftSeats, FlightMileage) V
 
 -- Inserts para la tabla CustomerFlight
 INSERT INTO CustomerFlight (CustomerID, FlightNumber) VALUES
-(1, 'DL143'),
-(1, 'DL122'),
-(2, 'DL122'),
-(1, 'DL143'),
-(3, 'DL122'),
-(3, 'DL53'),
-(1, 'DL143'),
-(4, 'DL143'),
-(5, 'DL122'),
-(5, 'DL143'),
-(6, 'DL222'),
-(7, 'DL222'),
-(8, 'DL222'),
-(8, 'DL222'),
-(5, 'DL122'),
-(9, 'DL143'),
-(10, 'DL143'),
-(11, 'DL143'),
-(4, 'DL37'),
-(12, 'DL222'),
-(13, 'DL222'),
-(14, 'DL222'),
-(15, 'DL222'),
-(5, 'DL37');
+(1,"DL143"),
+(1,"DL122"),
+(2,"DL122"),
+(1,"DL143"),
+(3,"DL122"),
+(3,"DL53"),
+(1,"DL143"),
+(4,"DL143"),
+(1,"DL143"),
+(3,"DL222"),
+(5,"DL143"),
+(4,"DL143"),
+(6,"DL222"),
+(7,"DL222"),
+(5,"DL122"),
+(4,"DL37"),
+(8,"DL222");
 
 
 -- In the Airline database write the SQL script to get the total number of flights in the database.

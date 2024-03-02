@@ -1,7 +1,7 @@
 CREATE DATABASE example_lab_sql_exercise1;
 USE example_lab_sql_exercise1;
 
-CREATE TABLE Author(
+CREATE TABLE Authors(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     author_name varchar(255) NOT NULL
 );
@@ -11,8 +11,9 @@ CREATE TABLE Books(
     author_id INT NOT NULL,
     title varchar(255) NOT NULL,
     word_count INT NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES Author(author_id)
-)
+    views INT NOT NULL,
+    FOREIGN KEY (author_id) REFERENCES Authors(id)
+);
 
 INSERT INTO Authors (author_name) VALUES
 ("Maria Charlotte"),
@@ -27,4 +28,6 @@ INSERT INTO Books (author_id, title, word_count, views) VALUES
 (2,"Kitchen Refresh",1242,307),
 (1,"Homemade Art Hacks",1002,193),
 (3,"Refinishing Wood Floors",1571,7542);
+
+
 
