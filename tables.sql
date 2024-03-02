@@ -17,12 +17,38 @@ CREATE TABLE Articles (
     FOREIGN KEY (title_id) REFERENCES Titles(title_id)
 );
 
+-- 01 Customers Table
 CREATE TABLE Customers (
     customer_id INT PRIMARY KEY AUTO_INCREMENT,
     customer_name VARCHAR(255) NOT NULL,
     customer_status VARCHAR(50)
 );
--- 02 Arline Table normalization
+
+-- 02 Aircraft Table
+CREATE TABLE Aircraft (
+    aircraft_id INT PRIMARY KEY AUTO_INCREMENT,
+    aircraft_type VARCHAR(50) NOT NULL
+);
+
+-- 03 Flights Table
+CREATE TABLE Flights (
+    flight_number VARCHAR(10) PRIMARY KEY,
+    aircraft_id INT,
+    total_aircraft_seats INT,
+    flight_mileage INT,
+    FOREIGN KEY (aircraft_id) REFERENCES Aircraft(aircraft_id)
+);
+
+-- 04 Bookings Table
+CREATE TABLE Bookings (
+    booking_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    flight_number VARCHAR(10),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (flight_number) REFERENCES Flights(flight_number)
+);
+
+-- 05 Airline Table
 CREATE TABLE Airline (
     customer_name VARCHAR(255) NOT NULL,
     customer_status VARCHAR(50),
@@ -31,25 +57,6 @@ CREATE TABLE Airline (
     total_aircraft_seats INT,
     flight_mileage INT,
     total_customer_mileage INT
-);
-
-CREATE TABLE Flights (
-    flight_number VARCHAR(10) PRIMARY KEY,
-    aircraft_id INT,
-    total_aircraft_seats INT,
-    flight_mileage INT,
-    FOREIGN KEY (aircraft_id) REFERENCES Aircraft(aircraft_id)
-);
-CREATE TABLE Aircraft (
-    aircraft_id INT PRIMARY KEY AUTO_INCREMENT,
-    aircraft_type VARCHAR(50) NOT NULL
-);
-CREATE TABLE Bookings (
-    booking_id INT PRIMARY KEY AUTO_INCREMENT,
-    customer_id INT,
-    flight_number VARCHAR(10),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
-    FOREIGN KEY (flight_number) REFERENCES Flights(flight_number)
 );
 -- SQL Queries for Airline Database
 
