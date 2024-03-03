@@ -1,3 +1,6 @@
+CREATE DATABASE blog_lab;
+USE blog_lab;
+
 -- Create the author table (if it doesn't exist)
 CREATE TABLE IF NOT EXISTS author(
     id_author INT AUTO_INCREMENT PRIMARY KEY,

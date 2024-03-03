@@ -1,3 +1,5 @@
+USE airline_lab;
+
 -- Select the "Airline" database
 USE airline_lab;
 

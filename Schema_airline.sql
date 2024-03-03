@@ -1,3 +1,6 @@
+CREATE DATABASE airline_lab;
+USE airline_lab;
+
 -- Create the Customer table (if it doesn't exist)
 CREATE TABLE IF NOT EXISTS customer (
     id_customer INT AUTO_INCREMENT,
