@@ -1,5 +1,19 @@
 USE lab_sql;
 
+INSERT INTO authors (id, author) VALUES 
+(1, 'Maria Charlotte'),
+(2, 'Juan Perez'),
+(3, 'Gemma Alcocer');
+
+INSERT INTO posts (id, title, word_count, views, author_id) VALUES
+(1, 'Best Paint Colors', 814, 14, 1),
+(2, 'Small Space Decorating Tips', 1146, 221, 2),
+(3, 'Hot Accessories', 986, 105, 1),
+(4, 'Mixing Textures', 765, 22, 1),
+(5, 'Kitchen Refresh', 1242, 307, 2),
+(6, 'Homemade Art Hacks', 1002, 193, 1),
+(7, 'Refinishing Wood Floors', 1571, 7542, 3);
+
 INSERT INTO aircrafts (id, aircraft, total_aircraft_seats) VALUES
 (1, 'Airbus A330', '236'),
 (2, 'Boeing 747', '400'),
