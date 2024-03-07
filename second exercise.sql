@@ -1,17 +1,12 @@
 create database lab_sql_2;
 Use lab_sql_2;
 
-CREATE TABLE Customer_Status (
-	status_id INT AUTO_INCREMENT PRIMARY KEY,
-    status VARCHAR(10)
-);
 
 CREATE TABLE Customer (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_name VARCHAR(255),
-    customer_status_id INT,
-    total_customer_mileage INT,
-    FOREIGN KEY (customer_status_id) REFERENCES Customer_Status(status_id)
+    customer_status VARCHAR(255),
+    total_customer_mileage INT
 );
 
 CREATE TABLE Aircraft (
@@ -30,21 +25,15 @@ CREATE TABLE Flight (
 );
 
 
-
-INSERT INTO Customer_Status (status) VALUES
-("Gold"),
-("Silver"),
-("None");
-
-INSERT INTO Customer (customer_name, customer_status_id, total_customer_mileage) VALUES
-("Agustine Riviera", 2, 115235),
-("Alaina Sepulvida", 3, 6008),
-("Tom Jones", 1, 205767),
-("Sam Rio", 3, 2653),
-("Jessica James", 2, 127656),
-("Ana Janco", 2, 136773),
-("Jennifer Cortez", 1, 300582),
-("Christian Janco", 2, 14642);
+INSERT INTO Customer (customer_name, customer_status, total_customer_mileage) VALUES
+("Agustine Riviera", "Silver", 115235),
+("Alaina Sepulvida", "None", 6008),
+("Tom Jones", "Gold", 205767),
+("Sam Rio", "None", 2653),
+("Jessica James", "Silver", 127656),
+("Ana Janco", "Silver", 136773),
+("Jennifer Cortez", "Gold", 300582),
+("Christian Janco", "Silver", 14642);
 
 INSERT INTO Aircraft (aircraft_name, total_seats) VALUES
 ("Boeing 747", 400),
@@ -66,7 +55,7 @@ CREATE TABLE customer_flights (
     PRIMARY KEY (id),
     FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
     FOREIGN KEY (flight_id) REFERENCES Flight(flight_id)
-    );
+);
     
 INSERT INTO customer_flights (customer_id, flight_id) VALUES
 	(1, 1),
@@ -84,20 +73,22 @@ INSERT INTO customer_flights (customer_id, flight_id) VALUES
     (8, 4);
     
 
-SELECT
+SELECT 
     c.customer_name,
-    cs.status,
-    f.flight_number,
+    c.customer_status,
+    c.total_customer_mileage,
     a.aircraft_name,
     a.total_seats,
-    f.flight_mileage,
-    c.total_customer_mileage
-FROM
-    Customer c
-INNER JOIN Customer_Status cs ON c.customer_status_id = cs.status_id
-INNER JOIN customer_flights cf ON c.customer_id = cf.customer_id
-INNER JOIN Flight f ON cf.flight_id = f.flight_id
-INNER JOIN Aircraft a ON f.aircraft_id = a.aircraft_id;
+    f.flight_number,
+    f.flight_mileage
+FROM 
+    customer_flights cf
+JOIN 
+    Customer c ON cf.customer_id = c.customer_id
+JOIN 
+    Flight f ON cf.flight_id = f.flight_id
+JOIN 
+    Aircraft a ON f.aircraft_id = a.aircraft_id;
 
 -- In the Airline database write the SQL script to get the total number of flights in the database.
 SELECT COUNT(*) FROM Flight;
@@ -109,12 +100,10 @@ SELECT AVG(flight_mileage) FROM Flight;
 SELECT AVG(total_seats) FROM Aircraft;
 
 -- In the Airline database write the SQL script to get the average number of miles flown by customers grouped by status.
-SELECT Customer_Status.status, AVG(total_customer_mileage) FROM Customer 
-JOIN Customer_Status ON Customer.customer_status_id = Customer_Status.status_id GROUP BY Customer_Status.status;
+SELECT customer_status,AVG(total_customer_mileage) AS average_miles_flown FROM Customer GROUP BY customer_status;
 
 -- In the Airline database write the SQL script to get the maximum number of miles flown by customers grouped by status.
-SELECT Customer_Status.status, MAX(total_customer_mileage) FROM Customer 
-JOIN Customer_Status ON Customer.customer_status_id = Customer_Status.status_id GROUP BY Customer_Status.status;
+SELECT customer_status, MAX(total_customer_mileage) AS max_miles_flown FROM Customer GROUP BY customer_status;
 
 -- In the Airline database write the SQL script to get the total number of aircraft with a name containing Boeing.
 SELECT COUNT(*) FROM Aircraft WHERE aircraft_name LIKE '%Boeing%';
@@ -123,19 +112,19 @@ SELECT COUNT(*) FROM Aircraft WHERE aircraft_name LIKE '%Boeing%';
 SELECT * FROM Flight WHERE flight_mileage BETWEEN 300 AND 2000;
 
 -- In the Airline database write the SQL script to find the average flight distance booked grouped by customer status (this should require a join).
-SELECT Customer_Status.status, AVG(Flight.flight_mileage) FROM customer_flights 
-JOIN Customer ON customer_flights.customer_id = Customer.customer_id
-JOIN Customer_Status ON Customer.customer_status_id = Customer_Status.status_id
-JOIN Flight  ON customer_flights.flight_id = Flight.flight_id
-GROUP BY Customer_Status.status;
+SELECT customer_status, AVG(flight_mileage) 
+FROM customer_flights CF
+JOIN Customer C ON CF.customer_id = C.customer_id
+JOIN Flight F ON CF.flight_id = F.flight_id
+GROUP BY C.customer_status;
 
 -- In the Airline database write the SQL script to find the most often booked aircraft by gold status members (this should require a join).
-SELECT Customer_Status.status, Aircraft.aircraft_name, COUNT(*) FROM customer_flights 
-JOIN Customer ON customer_flights.customer_id = Customer.customer_id
-JOIN Customer_Status ON Customer.customer_status_id = Customer_Status.status_id
-JOIN Flight ON customer_flights.flight_id = Flight.flight_id
-JOIN Aircraft  ON Flight.aircraft_id = Aircraft.aircraft_id
-WHERE Customer_Status.status = 'Gold'
-GROUP BY Aircraft.aircraft_name
+SELECT a.aircraft_name, COUNT(*) AS bookings_count
+FROM Customer c
+JOIN customer_flights cf ON c.customer_id = cf.customer_id
+JOIN Flight f ON cf.flight_id = f.flight_id
+JOIN Aircraft a ON f.aircraft_id = a.aircraft_id
+WHERE c.customer_status = 'Gold'
+GROUP BY a.aircraft_name
 ORDER BY COUNT(*) DESC
 LIMIT 1;
