@@ -74,7 +74,7 @@ INSERT INTO Operations (customer_id, flight_id) VALUES
    
 -- 3 In the Airline database write the SQL script to get the total number of flights in the database.
 
-SELECT COUNT(*) as "Total_Flights" FROM Operations;
+SELECT COUNT(*) as "Total_Flights" FROM Flights;
 
 -- 4 In the Airline database write the SQL script to get the average flight distance.
 
