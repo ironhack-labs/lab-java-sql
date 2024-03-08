@@ -73,20 +73,22 @@ INSERT INTO Operations (customer_id, flight_id) VALUES
    
    
 -- 3 In the Airline database write the SQL script to get the total number of flights in the database.
-SELECT COUNT(*) as "Total_Flights" FROM Flights;
+
+SELECT COUNT(*) as "Total_Flights" FROM Operations;
 
 -- 4 In the Airline database write the SQL script to get the average flight distance.
+
 select COUNT(*) as "Flights",
- sum(flight_mileage) as "Total_Miles",
- sum(flight_mileage)/COUNT(*) as "Miles_AVG",
+ -- sum(flight_mileage) as "Total_Miles",
+ -- sum(flight_mileage)/COUNT(*) as "Miles_AVG",
  avg(flight_mileage) as "SQL_Miles_AVG"
 from Flights;
 
 -- 5 In the Airline database write the SQL script to get the average number of seats.
 select 
 COUNT(*) as "Flights",
- sum(total_seats) as "Total_Seats",
- sum(total_seats)/COUNT(*) as "Seats_AVG",
+ -- sum(total_seats) as "Total_Seats",
+ -- sum(total_seats)/COUNT(*) as "Seats_AVG",
  avg(total_seats) as "SQL_Seats_AVG"
 from 
 	aircraft a ;
@@ -114,6 +116,7 @@ order by
     customer_status;
    
 -- 8 In the Airline database write the SQL script to get the total number of aircraft with a name containing Boeing.
+   
 select
 	count(*) as "Total_Boeing_Airplanes"
 from
@@ -123,12 +126,13 @@ where
 	
    
 -- 9 In the Airline database write the SQL script to find all flights with a distance between 300 and 2000 miles.
+	
 select 
 	f.flight_number 
 from 
 	flights f 
 where 
-	f.flight_mileage > 300 and f.flight_mileage <2000
+	f.flight_mileage between 300 and 2000
 
 -- 10 In the Airline database write the SQL script to find the average flight distance booked grouped by customer status (this should require a join).
 select
@@ -146,6 +150,7 @@ order by
     c.customer_status;
 	
 -- 11 In the Airline database write the SQL script to find the most often booked aircraft by gold status members (this should require a join).
+   
 	select
  	c.customer_status,
  	a.aircraft_type,count(*)
