@@ -1,0 +1,12 @@
+spring:
+  #  main:
+  #    log-startup-info: false
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/Airlines_db
+    username: User1
+    password: Plamen2012
+  jpa:
+    hibernate:
+      ddl-auto: create
+#    show-sql: true
