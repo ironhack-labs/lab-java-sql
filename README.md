@@ -35,29 +35,92 @@ Once you finish the assignment, submit a URL link to your repository or your pul
 | Maria Charlotte | Homemade Art Hacks          | 1002       | 193   |
 | Gemma Alcocer   | Refinishing Wood Floors     | 1571       | 7542  |
 
+| author   ID | Author          |   | Author ID | title                       | word count | views |        
+|-------------|-----------------|---|-----------|-----------------------------|------------|-------|
+| 1           | Maria Charlotte |   | 1         | Best Paint Colors           | 814        | 14    |
+| 2           | Juan Perez      |   | 2         | Small Space Decorating Tips | 1146       | 221   |
+| 3           | Gemma Alcocer   |   | 1         | Hot Accessories             | 986        | 105   |
+|             |                 |   | 1         | Mixing Textures             | 765        | 22    |
+|             |                 |   | 2         | Kitchen Refresh             | 1242       | 307   |
+|             |                 |   | 1         | Homemade Art Hacks          | 1002       | 193   |
+|             |                 |   | 3         | Refinishing Wood Floors     | 1571       | 7542  |
+
 <br>
 
 2.  Normalize the following airline database and write the DDL scripts to create the database tables:
+3. GOING TO NORMALIZE HERE.
 
-| Customer Name    | Customer Status | Flight Number | Aircraft    | Total Aircraft Seats | Flight Mileage | Total Customer Mileage |
-| ---------------- | --------------- | ------------- | ----------- | -------------------- | -------------- | ---------------------- |
-| Agustine Riviera | Silver          | DL143         | Boeing 747  | 400                  | 135            | 115235                 |
-| Agustine Riviera | Silver          | DL122         | Airbus A330 | 236                  | 4370           | 115235                 |
-| Alaina Sepulvida | None            | DL122         | Airbus A330 | 236                  | 4370           | 6008                   |
-| Agustine Riviera | Silver          | DL143         | Boeing 747  | 400                  | 135            | 115235                 |
-| Tom Jones        | Gold            | DL122         | Airbus A330 | 236                  | 4370           | 205767                 |
-| Tom Jones        | Gold            | DL53          | Boeing 777  | 264                  | 2078           | 205767                 |
-| Agustine Riviera | Silver          | DL143         | Boeing 747  | 400                  | 135            | 115235                 |
-| Sam Rio          | None            | DL143         | Boeing 747  | 400                  | 135            | 2653                   |
-| Agustine Riviera | Silver          | DL143         | Boeing 747  | 400                  | 135            | 115235                 |
-| Tom Jones        | Gold            | DL222         | Boeing 777  | 264                  | 1765           | 205767                 |
-| Jessica James    | Silver          | DL143         | Boeing 747  | 400                  | 135            | 127656                 |
-| Sam Rio          | None            | DL143         | Boeing 747  | 400                  | 135            | 2653                   |
-| Ana Janco        | Silver          | DL222         | Boeing 777  | 264                  | 1765           | 136773                 |
-| Jennifer Cortez  | Gold            | DL222         | Boeing 777  | 264                  | 1765           | 300582                 |
-| Jessica James    | Silver          | DL122         | Airbus A330 | 236                  | 4370           | 127656                 |
-| Sam Rio          | None            | DL37          | Boeing 747  | 400                  | 531            | 2653                   |
-| Christian Janco  | Silver          | DL222         | Boeing 777  | 264                  | 1765           | 14642                  |
+| Customer Name    | cID | Customer Status | Total Customer Mileage |   | Aircraft    | Aircraft ID | Aircraft Seats |     | cID | Flight Number | Aircraft ID | Flight Mileage |
+|------------------|-----|-----------------|------------------------|---|-------------|-------------|----------------|-----|-----|---------------|-------------|----------------|
+| Agustine Riviera | 1   | Silver          | 115235                 |   | Boeing 747  | 1           | 400            |     | 1   | DL143         | 1           | 135            |
+| Alaina Sepulvida | 2   | None            | 6008                   |   | Airbus A330 | 2           | 236            |     | 1   | DL122         | 2           | 4370           |
+| Tom Jones        | 3   | Gold            | 205767                 |   | Boeing 777  | 3           | 264            |     | 2   | DL122         | 2           | 4370           |
+| Sam Rio          | 4   | None            | 2653                   |   |             |             |                |     | 3   | DL122         | 2           | 4370           |
+| Jessica James    | 5   | Silver          | 127656                 |   |             |             |                |     | 3   | DL53          | 3           | 2078           |
+| Ana Janco        | 6   | Silver          | 136773                 |   |             |             |                |     | 4   | DL143         | 1           | 135            |
+| Jennifer Cortez  | 7   | Gold            | 300582                 |   |             |             |                |     | 3   | DL222         | 3           | 1765           |
+| Christian Janco  | 8   | Silver          | 14642                  |   |             |             |                |     | 5   | DL143         | 1           | 135            |
+|                  |     |                 |                        |   |             |             |                |     | 6   | DL222         | 3           | 1765           |
+|                  |     |                 |                        |   |             |             |                |     | 7   | DL222         | 3           | 1765           |
+|                  |     |                 |                        |   |             |             |                |     | 5   | DL122         | 2           | 4370           |
+|                  |     |                 |                        |   |             |             |                |     | 4   | DL37          | 1           | 531            |
+|                  |     |                 |                        |   |             |             |                |     | 8   | DL222         | 3           | 1765           |
+ Feel Satisfied with this normalization.
+       
+ drop schema if exists test;   
+ create schema  test;
+ use test;
+ 
+ drop table if exists customer;
+ create table if not exists customer (
+ 	cId INT auto_increment,
+ 	customer_status VARCHAR(255),
+ 	customer_name VARCHAR(255),
+ 	total_customer_mileage INT,
+ 	primary key (cId)
+ )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+ 
+ drop table if exists aircraft;
+ create table if not exists aircraft (
+ 	aircraft_id INT auto_increment,
+ 	aircraft_name VARCHAR(255),
+ 	aircraft_seats smallint,
+ 	primary key (aircraft_id)
+ )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+ 
+ drop table if exists flights;
+ create table if not exists flights(
+ customer_id INT,
+ flight_number VARCHAR(255),
+ aircraft_id INT,
+ flight_mileage INT,
+ foreign key (customer_id) references customer(cId),
+ foreign key (aircraft_id) references aircraft(aircraft_id)
+ )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+ 
+ 
+ insert into customer (customer_status, customer_name, total_customer_mileage)values
+ ('Silver','Agustine Rivera', 115235), ('None','Alaina Sepulvida', 6008), ('Gold','Tom Jones',205767),
+ ('None', 'Sam Rio', 2653), ('Silver','Jessica James', 127656), ('Silver', 'Ana janco', '136773'),
+ ('Gold', 'Jennifer Cortez', 300582), ('Silver', 'Christian Janco', 14642);
+ 
+ insert into aircraft (aircraft_name, aircraft_seats) values ('Boeing 747',400), ('Airbus A330',236), ('Boeing 777', 264);
+ 
+ insert into flights (customer_id, flight_number, aircraft_id, flight_mileage)values(1,'DL143',1,135),(1,'DL122',2,4370),(2,'DL122',2,4370),(3,'DL122',2,4370),
+ (3,'DL53',3,2078),(4,'DL143',1,135),(3,'DL222',3,1765),(5,'DL143',1,135), (6,'DL222',3,1765), (7, 'DL222',3,1765),(5,'DL122',2,4370), (4,'DL37',1,531),(8,'DL222',3,1765);
+ 
+ select count(flight_number) from flights;
+ select avg(flight_mileage) from flights; 
+ select avg(aircraft_seats) from aircraft;
+ select avg(total_customer_mileage) from customer group by customer_status;
+ select max(total_customer_mileage) from customer group by customer_status; 
+ select count(*) from aircraft where aircraft_name like 'Boeing%';
+ select count(*) from flights where flight_mileage between 300 and 2000;
+ select c.customer_status, avg(flight_mileage) from customer c join flights f on c.cId = f.customer_id group by c.customer_status;
+ select a.aircraft_name, count(*) from customer c join flights f on c.cId = f.customer_id join aircraft a on f.aircraft_id = a.aircraft_id where c.customer_status = 'Gold' group by a.aircraft_id, a.aircraft_name order by count(*) desc limit 1;
+ 
+
+
 
 <br>
 
@@ -70,6 +133,12 @@ Once you finish the assignment, submit a URL link to your repository or your pul
 9. In the Airline database write the SQL script to find all flights with a distance between 300 and 2000 miles.
 10. In the Airline database write the SQL script to find the average flight distance booked grouped by customer status (this should require a join).
 11. In the Airline database write the SQL script to find the most often booked aircraft by gold status members (this should require a join).
+
+
+                                                   
+HERE IS MY SQL:
+
+
 
 <br>
 
