@@ -1,0 +1,3 @@
+SELECT *
+FROM Flights
+WHERE FlightMileage BETWEEN 300 AND 2000;
