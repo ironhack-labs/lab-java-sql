@@ -1,0 +1,33 @@
+CREATE DATABASE Localhost;
+
+USE Localhost;
+
+CREATE TABLE Authors (
+                         author_id INT PRIMARY KEY AUTO_INCREMENT,
+                         author_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE Posts (
+                       post_id INT PRIMARY KEY AUTO_INCREMENT,
+                       author_id INT,
+                       title VARCHAR(255) NOT NULL,
+                       word_count INT NOT NULL,
+                       views INT NOT NULL,
+                       FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+);
+
+INSERT INTO Authors (author_name)
+VALUES
+    ('Maria Charlotte'),
+    ('Juan Perez'),
+    ('Gemma Alcocer');
+
+INSERT INTO Posts (author_id, title, word_count, views)
+VALUES
+    ((SELECT author_id FROM Authors WHERE author_name = 'Maria Charlotte'), 'Best Paint Colors', 814, 14),
+    ((SELECT author_id FROM Authors WHERE author_name = 'Juan Perez'), 'Small Space Decorating Tips', 1146, 221),
+    ((SELECT author_id FROM Authors WHERE author_name = 'Maria Charlotte'), 'Hot Accessories', 986, 105),
+    ((SELECT author_id FROM Authors WHERE author_name = 'Maria Charlotte'), 'Mixing Textures', 765, 22),
+    ((SELECT author_id FROM Authors WHERE author_name = 'Juan Perez'), 'Kitchen Refresh', 1242, 307),
+    ((SELECT author_id FROM Authors WHERE author_name = 'Maria Charlotte'), 'Homemade Art Hacks', 1002, 193),
+    ((SELECT author_id FROM Authors WHERE author_name = 'Gemma Alcocer'),
